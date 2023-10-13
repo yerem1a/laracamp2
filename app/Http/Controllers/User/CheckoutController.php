@@ -3,14 +3,15 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
-use App\Models\Checkout;
-use Illuminate\Http\Request;
-use App\Http\Requests\User\Checkout\Store;
 use App\Models\Camp;
+use App\Models\Checkout;
+use App\Http\Requests\User\Checkout\Store;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\Checkout\AfterCheckout;
-// use Auth;
+
 
 
 class CheckoutController extends Controller
@@ -37,11 +38,7 @@ class CheckoutController extends Controller
             $request->session()->flash('error', "You already registered on {$camp->title} camp.");
             return redirect(route('dashboard'));
         }
-
-        return view('checkout.create',
-    [
-        'camp' => $camp
-    ]);
+        return view('checkout.create', ['camp' => $camp]);
     }
 
     /**
